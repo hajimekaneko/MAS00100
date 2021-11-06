@@ -1,20 +1,11 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
+import routes from './routes'
+import { authorizeToken } from './guards'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-// const routes = [
-
-// ]
-
-// const stockchart = { template: '<div>初めてのVue Resource</div>'}
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes : [
-		// {path:'/stockchart', redirect : '/stockchart'},
-	]
-})
+const router = new Router({ routes })
+router.beforeEach(authorizeToken)
 
 export default router

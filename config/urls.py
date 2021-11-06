@@ -6,7 +6,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myappsite.urls')),
-    path('stockchart/', include('stockchart.urls'))
+    path('stockchart/', include('stockchart.urls')),
+    path('taskmanagement/', include('taskmanagement.urls'))
 ]
 
 urlpatterns += static(
