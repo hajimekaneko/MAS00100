@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import MyAppSite from './MyAppSite.vue'
-import router from './router'
-import store from './store'
+import StockChart from './StockChart.vue'
+import router from '../../router'
+import store from '../../store'
 
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.css' // add
@@ -12,5 +12,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(MyAppSite)
+  render: h => h(StockChart)
 }).$mount('#app')

@@ -1,20 +1,20 @@
 <template>
     <div id="app">
         <Header/>
-        <StockChart/>
+        <MyAppSite/>
         <router-view/>
         <Footer/>
     </div>
 </template>
 
 <script>
-    import Header from "./components/Organisms/Header"
-    import StockChart from "./components/Organisms/StockChart"
-    import Footer from "./components/Organisms/Footer"
+    import Header from "../components/Organisms/Header"
+    import MyAppSite from "../components/Organisms/MyAppSite"
+    import Footer from "../components/Organisms/Footer"
 
     export default {
         name: 'app',
-        components: {Header, StockChart, Footer}
+        components: {Header, MyAppSite, Footer}
     }
 </script>
 
