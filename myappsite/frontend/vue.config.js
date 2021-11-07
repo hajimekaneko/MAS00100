@@ -10,5 +10,10 @@ module.exports = {
         template: 'public/stockchart.html',
         filename: 'stockchart.html',
       },
+      taskmanagement: {
+        entry: 'src/pages/taskmanagement/main.js',
+        template: 'public/taskmanagement.html',
+        filename: 'taskmanagement.html',
+      },
     },
   };
