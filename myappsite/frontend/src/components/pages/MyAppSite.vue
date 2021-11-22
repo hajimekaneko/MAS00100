@@ -8,9 +8,9 @@
 </template>
 
 <script>
-    import Header from "../components/Organisms/Header"
-    import MyAppSite from "../components/Organisms/MyAppSite"
-    import Footer from "../components/Organisms/Footer"
+    import Header from "@/components/organisms/Header"
+    import MyAppSite from "@/components/organisms/MyAppSite"
+    import Footer from "@/components/organisms/Footer"
 
     export default {
         name: 'app',

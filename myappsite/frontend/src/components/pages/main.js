@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import StockChart from './StockChart.vue'
+import MyAppSite from './MyAppSite.vue'
 import router from '../../router'
 import store from '../../store'
 
@@ -12,5 +12,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(StockChart)
+  render: h => h(MyAppSite)
 }).$mount('#app')
