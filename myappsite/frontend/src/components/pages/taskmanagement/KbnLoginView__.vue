@@ -1,6 +1,6 @@
 <template>
   <div class="login-view">
-    <h1>Kanban App</h1>
+    <h1>Kanban App Login</h1>
     <KbnLoginForm :onlogin="handleLogin" />
   </div>
 </template>
@@ -9,7 +9,7 @@
 import KbnLoginForm from '@/components/molecules/KbnLoginForm.vue'
 
 export default {
-  name: 'KbnLoginView',
+  name: 'TaskManagement',
 
   components: {
     KbnLoginForm

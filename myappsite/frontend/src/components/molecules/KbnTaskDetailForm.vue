@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    handleClick (ev) {
+    handleClick () {
       // 更新処理されている最中に実行されないようガード
       if (this.progress) { return }
 

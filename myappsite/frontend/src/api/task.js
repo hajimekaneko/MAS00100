@@ -21,7 +21,7 @@ export default {
     })
   },
 
-  remove: (token, { id, listId }) => {
+  remove: (token, { id }) => {
     return new Promise((resolve, reject) => {
       client.delete(`/tasks/${id}/remove`, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())

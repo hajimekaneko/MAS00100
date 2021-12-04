@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apiv1.apps.Apiv1Config',
+    'myappsite.apps.MyappsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,6 +138,7 @@ if DEBUG:
     INSTALLED_APPS += ['corsheaders']
     MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
     CORS_ORIGIN_WHITELIST = (
-        'http://192.168.162.46:8080',
+        'http://172.17.0.201:8080',
         'http://localhost:8080',
     )
+

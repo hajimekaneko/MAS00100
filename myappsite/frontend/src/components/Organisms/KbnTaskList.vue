@@ -72,6 +72,7 @@ export default {
     draggableItems: {
       get () { return this.items },
       set (value) {
+        console.log(value)
         // NOTE:
         //  本来なら、Vue.Draggrableから処理されたデータをitemsに反映すれば可能だが、
         //  フロントエンドとバックエンドの状態を整合とるために、ここでは何もしない。

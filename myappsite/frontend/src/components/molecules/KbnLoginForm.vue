@@ -118,17 +118,19 @@ export default {
 
     handleClick () {
       if (this.disableLoginAction) { return } // 不備があればログイン処理が実行されないようガード
-
       this.progress = true // ログイン処理実行中をあらわす
       this.error = ''
-
+      
       this.$nextTick(() => {
         this.onlogin({ email: this.email, password: this.password })
           .catch(err => {
             this.error = err.message
+            console.log("エラーです。")
+            console.log(this.error)
           })
           .then(() => {
             this.progress = false
+            console.log("OKです")
           })
       })
     }

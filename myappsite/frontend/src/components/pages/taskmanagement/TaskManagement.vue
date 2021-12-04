@@ -3,7 +3,7 @@
         <Header/>
         <!-- <TaskManagement/> -->
         <div class="login-view">
-            <h1>Kanban App</h1>
+            <h1>Kanban App kore</h1>
             <KbnLoginForm :onlogin="handleLogin" />
         </div>
         <router-view/>
@@ -23,11 +23,11 @@
         components: {Header, KbnLoginForm, Footer},
         methods: {
             handleLogin (authInfo) {
-            return this.$store.dispatch('login', authInfo)
-                .then(() => {
-                this.$router.push({ path: '/' })
-                })
-                .catch(err => this.throwReject(err))
+                return this.$store.dispatch('login', authInfo)
+                    .then(() => {
+                    this.$router.push({ path: '/' })
+                    })
+                    .catch(err => this.throwReject(err))
             },
             throwReject (err) { return Promise.reject(err) }
         }

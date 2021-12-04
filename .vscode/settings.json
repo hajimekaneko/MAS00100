@@ -14,6 +14,9 @@
     "autoFix": true
   }
 ],
+"workbench.colorCustomizations": {
+  "activityBar.background": "#261f46"
+},
 
 // Prettier の ESLint 連携
 "prettier.eslintIntegration": true,

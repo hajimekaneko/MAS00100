@@ -15,7 +15,7 @@
                 </div>
                 </a>
                  <!-- <router-link to="/stockchart">stockchart</router-link> -->
-                 <router-view></router-view>
+                 <!-- <router-view></router-view> -->
             </div>
             <div class="col">
                 <a href="/taskmanagement">
@@ -30,7 +30,7 @@
                 </div>
                 </a>
                  <!-- <router-link to="/stockchart">stockchart</router-link> -->
-                 <router-view></router-view>
+                 <!-- <router-view></router-view> -->
             </div>
         </div>
     </div>

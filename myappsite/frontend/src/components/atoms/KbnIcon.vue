@@ -29,6 +29,8 @@ export default {
         return 'x'
       } else if (name === 'add') {
         return '+'
+      } else {
+        return '?'
       }
     }
   }
