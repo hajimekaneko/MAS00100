@@ -6,7 +6,7 @@ export default {
     return new Promise((resolve, reject) => {
       console.log("hogehoge2")
       console.log(authInfo)
-      client.post('/auth/login', authInfo)
+      client.post('/auth/login/', authInfo)
         .then(res => resolve({ token: res.data.token, userId: res.data.userId }))
         .catch(err => {
           console.log("hogehoge123")
@@ -17,7 +17,8 @@ export default {
 
   logout: token => {
     return new Promise((resolve, reject) => {
-      client.delete('/auth/logout', { headers: { 'x-kbn-token': token } })
+      console.log("ssss")
+      client.delete('/auth/logout/', { headers: { 'x-kbn-token': token }})
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))

@@ -1,4 +1,5 @@
 <template>
+
   <div class="board-view">
     <KbnBoardNavigation @logout="handleLogout" />
     <p

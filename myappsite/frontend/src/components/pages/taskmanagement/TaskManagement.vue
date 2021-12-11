@@ -1,10 +1,8 @@
 <template>
     <div id="app">
         <Header/>
-        <!-- <TaskManagement/> -->
         <div class="login-view">
             <h1>Kanban App kore</h1>
-            <KbnLoginForm :onlogin="handleLogin" />
         </div>
         <router-view/>
         <Footer/>
@@ -14,13 +12,13 @@
 <script>
     import Header from "@/components/organisms/Header"
     // import TaskManagement from "@/components/organisms/TaskManagement"
-    import KbnLoginForm from '@/components/molecules/KbnLoginForm.vue'
+    // import KbnLoginForm from '@/components/molecules/KbnLoginForm.vue'
     import Footer from "@/components/organisms/Footer"
 
     export default {
         name: 'app',
         // components: {Header, TaskManagement, Footer}
-        components: {Header, KbnLoginForm, Footer},
+        components: {Header, Footer},
         methods: {
             handleLogin (authInfo) {
                 return this.$store.dispatch('login', authInfo)

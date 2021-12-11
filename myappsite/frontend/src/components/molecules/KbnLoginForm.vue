@@ -59,7 +59,6 @@ const required = val => !!val.trim()
 
 export default {
   name: 'KbnLoginForm',
-
   components: {
     KbnButton
   },
@@ -125,12 +124,12 @@ export default {
         this.onlogin({ email: this.email, password: this.password })
           .catch(err => {
             this.error = err.message
-            console.log("エラーです。")
+            console.log("ログインエラーです。")
             console.log(this.error)
           })
           .then(() => {
             this.progress = false
-            console.log("OKです")
+            console.log("ログインOKです")
           })
       })
     }

@@ -1,7 +1,7 @@
 <template>
   <nav class="board-navigation">
     <div class="title">
-      <h1>Kanban App</h1>
+      <h1>Kanban App 3 </h1>
     </div>
     <div class="actions">
       <KbnButton
