@@ -35,7 +35,7 @@ export default {
   },
 
   computed: mapState({
-    lists: state => state.board.lists
+    lists: state => state.taskmanagement.board.lists
   }),
 
   created () {

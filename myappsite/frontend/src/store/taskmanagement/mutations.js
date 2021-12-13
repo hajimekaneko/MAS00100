@@ -6,13 +6,16 @@ export default {
   },
 
   [types.FETCH_ALL_TASKLIST] (state, payload) {
-    state.board.lists = payload
+
+    console.log("payload")
+    console.log(payload)
+    state.taskmanagement.board.lists = payload
   },
 
   [types.ADD_TASK] (state, payload) {
     const task = payload
-    for (let i = 0; i < state.board.lists.length; i++) {
-      const list = state.board.lists[i]
+    for (let i = 0; i < state.taskmanagement.board.lists.length; i++) {
+      const list = state.taskmanagement.board.lists[i]
       if (list.id === task.listId) {
         list.items.push(task)
         break
@@ -22,8 +25,8 @@ export default {
 
   [types.UPDATE_TASK] (state, payload) {
     const task = payload
-    for (let i = 0; i < state.board.lists.length; i++) {
-      const list = state.board.lists[i]
+    for (let i = 0; i < state.taskmanagement.board.lists.length; i++) {
+      const list = state.taskmanagement.board.lists[i]
       if (list.id !== task.listId) { continue }
       for (let j = 0; j < list.items.length; j++) {
         const item = list.items[j]
@@ -38,8 +41,8 @@ export default {
 
   [types.REMOVE_TASK] (state, payload) {
     const { id, listId } = payload
-    for (let i = 0; i < state.board.lists.length; i++) {
-      const list = state.board.lists[i]
+    for (let i = 0; i < state.taskmanagement.board.lists.length; i++) {
+      const list = state.taskmanagement.board.lists[i]
       if (list.id !== listId) { continue }
       list.items = list.items.filter(item => item.id !== id)
     }
@@ -71,7 +74,7 @@ export default {
     state.dragging.to = null
 
     // 移動元のタスクリストから対象タスクを取り出す
-    const fromTaskList = getTaskList(state.board.lists, from)
+    const fromTaskList = getTaskList(state.taskmanagement.board.lists, from)
     const index = fromTaskList.items.findIndex(item => item.id === target)
     const task = fromTaskList.items[index]
     fromTaskList.items.splice(index, 1)
@@ -80,7 +83,7 @@ export default {
     task.listId = to
 
     // 移動先にタスクリストに対象タスクを格納
-    const toTaskList = getTaskList(state.board.lists, to)
+    const toTaskList = getTaskList(state.taskmanagement.board.lists, to)
     toTaskList.items.push(task)
   }
 }

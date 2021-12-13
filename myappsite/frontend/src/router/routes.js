@@ -1,9 +1,9 @@
-import KbnBoardView from '@/components/pages/taskmanagement/KbnBoardView.vue'
-import KbnTaskDetailModal from '@/components/pages/taskmanagement/KbnTaskDetailModal.vue'
-import KbnLoginView from '@/components/pages/taskmanagement/KbnLoginView.vue'
+import KbnBoardView from '@/components/template/taskmanagement/KbnBoardView.vue'
+import KbnTaskDetailModal from '@/components/template/taskmanagement/KbnTaskDetailModal.vue'
+import KbnLoginView from '@/components/template/taskmanagement/KbnLoginView.vue'
 
 export default [{
-  path: '/taskmanagement/',
+  path: '/taskmanagement',
   component: KbnBoardView,
   meta: { requiresAuth: true },
   children: [{
