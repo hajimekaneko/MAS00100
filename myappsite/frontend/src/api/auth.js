@@ -2,14 +2,12 @@ import client from './client'
 
 export default {
   login: authInfo => {
-    console.log(authInfo)
     return new Promise((resolve, reject) => {
-      console.log("hogehoge2")
-      console.log(authInfo)
       client.post('/auth/login/', authInfo)
-        .then(res => resolve({ token: res.data.token, userId: res.data.userId }))
+        // .then(response => console.log(response.data))
+        .then(response => resolve({ token: response.data.token, userId: response.data.userId }),
+        )
         .catch(err => {
-          console.log("hogehoge123")
           reject(new Error(err.response.data.message || err.message))
         })
     })
@@ -17,10 +15,10 @@ export default {
 
   logout: token => {
     return new Promise((resolve, reject) => {
-      console.log("ssss")
       client.delete('/auth/logout/', { headers: { 'x-kbn-token': token }})
         .then(() => resolve())
         .catch(err => {
+          console.log("err"),
           reject(new Error(err.response.data.message || err.message))
         })
     })

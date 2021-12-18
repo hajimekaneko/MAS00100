@@ -8,13 +8,16 @@ export default {
         localStorage.setItem('token', token)
         commit(types.AUTH_LOGIN, { token, userId })
       })
-      .catch(err => { throw err })
+      .catch(
+        err => { throw err }
+        )
   },
 
   fetchLists: ({ commit, state }) => {
     return List.fetch(state.auth.token)
-      .then(({ lists }) => {
-        commit(types.FETCH_ALL_TASKLIST, lists)
+      .then((response) => {
+        console.log(response),
+        commit(types.FETCH_ALL_TASKLIST, response)
       })
       .catch(err => { throw err })
   },
@@ -65,7 +68,6 @@ export default {
   logout: ({ commit, state }) => {
     return Auth.logout(state.auth.token)
       .then(() => {
-        localStorage.removeItem('token')
         commit(types.AUTH_LOGOUT, { token: null, userId: null })
       })
       .catch(err => { throw err })

@@ -19,12 +19,15 @@ export default {
     handleLogin (authInfo) {
       return this.$store.dispatch('login', authInfo)
         .then(() => {
-
           this.$router.push({ path: '/taskmanagement/' })
         })
-        .catch(err => this.throwReject(err))
+        .catch(
+          err => this.throwReject(err)
+          )
     },
-    throwReject (err) { return Promise.reject(err) }
+    throwReject (err) { 
+      return Promise.reject(err) 
+      }
   }
 }
 </script>

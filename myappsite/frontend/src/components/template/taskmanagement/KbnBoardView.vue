@@ -68,7 +68,7 @@ export default {
 
       return this.$store.dispatch('logout')
         .then(() => {
-          this.$router.push({ path: '/login' })
+          this.$router.push({ path: '/taskmanagement/login' })
         })
         .catch(err => Promise.reject(err))
         .then(() => {

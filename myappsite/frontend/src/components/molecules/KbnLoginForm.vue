@@ -119,7 +119,6 @@ export default {
       if (this.disableLoginAction) { return } // 不備があればログイン処理が実行されないようガード
       this.progress = true // ログイン処理実行中をあらわす
       this.error = ''
-      
       this.$nextTick(() => {
         this.onlogin({ email: this.email, password: this.password })
           .catch(err => {
@@ -129,7 +128,7 @@ export default {
           })
           .then(() => {
             this.progress = false
-            console.log("ログインOKです")
+            console.log("ログイン処理OKです")
           })
       })
     }

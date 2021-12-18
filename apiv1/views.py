@@ -1,9 +1,11 @@
 from os import strerror
 from rest_framework import fields, viewsets, generics, status, views
+from rest_framework import response
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import Serializer
-from myappsite.models import Auth
-from myappsite.serializers import AuthSerializer
+from django.shortcuts import get_object_or_404
+from myappsite.models import Auth, List
+from myappsite.serializers import AuthSerializer, ListSerializer
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
 
@@ -43,7 +45,7 @@ def createTask(listId):
 def createTaskList(name, num):
     id = generateTaskListId()
     list = {
-        "id": id,
+        "listId": id,
         "name": name,
         "items": []
     }
@@ -60,51 +62,42 @@ board = {
     ]
   }
 
-print("{}".format(board))
-
-
 class Authfilter(filters.FilterSet):
+    # フィルタの定義
+    emailfilter = filters.CharFilter(name="email", lookup_expr='exact')
+
     class Meta:
         model = Auth
         fields = '__all__'
 
 class AuthLoginAPIView(views.APIView):
     def post(self, request, *args, **Kwargs):
-        print('■■■■■■■■■')
-        print(request.data["email"])
-        print(request.data["password"])
-        print(request.query_params)
-
-        filterset = Authfilter(request.query_params, queryset = Auth.objects.all())
-        # if not filterset.is_vaild():
-        #     raise ValidationError(filterset.errors)
-        serializer = AuthSerializer(instance=filterset.qs, many=True)
-        print('■■■■■■■■■')
+        auth_data=get_object_or_404(Auth, email=request.data['email'])
+        serializer = AuthSerializer(instance=auth_data)
         print(serializer.data)
-        return Response(serializer.data, status.HTTP_200_OK)
+        return Response(serializer.data, status.HTTP_201_CREATED)
 
 class AuthLogoutAPIView(views.APIView):
-    print('■■■■■■■■■query_params')
     def delete(self, request,*args, **Kwargs):
-        print(request.query_params)
-        print('■■■■■■■■■')
-        login = generics.get_object_or_404(Auth, pk="")
-        login.delete()
-        print('■■■■■■■■■delete')
-        return Response(status = status.HTTP_204_NO_CONTENT)
+        print("■VIEW:LOGOUT")
+        token = request.headers['x-kbn-token']
+        if token is None :
+            return Response("許可されていません", status = status.HTTP_403_FORBIDDEN)
+        else:
+            return Response(status = status.HTTP_204_NO_CONTENT)
 
 
 class GetListAPIView(views.APIView):
     def get(self, request, *args, **Kwargs):
-        # ボード情報
-        board = {
-            "lists": [
-            createTaskList('TODO', 2),
-            createTaskList('WIP', 1),
-            createTaskList('DONE', 1)
-            ]
-  }
 
-        return Response(board["lists"], status = status.HTTP_200_OK)
-
-        
+        token = request.headers['x-kbn-token']
+        if token is None :
+            return Response("許可されていません", status = status.HTTP_403_FORBIDDEN)
+        else:
+            print("■{}".format(board["lists"]))
+            # list = List.objects.all()
+            list = get_object_or_404(List) 
+            print(list)
+            serializer = ListSerializer(instance=list)   
+            print("■{}".format(serializer.data))
+            return Response(serializer.data, status = status.HTTP_200_OK)
