@@ -8,9 +8,9 @@
 </template>
 
 <script>
-    import Header from "../../components/Organisms/Header"
-    import StockChart from "../../components/Organisms/StockChart"
-    import Footer from "../../components/Organisms/Footer"
+    import Header from "@/components/organisms/Header"
+    import StockChart from "@/components/organisms/StockChart"
+    import Footer from "@/components/organisms/Footer"
 
     export default {
         name: 'app',

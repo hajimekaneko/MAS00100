@@ -1,19 +1,23 @@
-import store from '../store'
+import store from '@/store'
 
 export const authorizeToken = (to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
     // マッチしたルートにおいて、メタフィールドに`requiresAuth`が付与されている場合は
     // ログインした際に付与される認証トークンがあるかどうかチェックする
     // 注意:
     // このアプリケーションでは簡略化のため`auth.token`があるかどうかのみで
     // ログイン済みであるかどうかチェックしているが、
     // 本来ならば付与された認証トークンをバックエンドのAPI経由などで検証すべき
-    if (!store.state.auth || !store.state.auth.token) {
-      next({ path: '/login' })
-    } else {
+    console.log("state.taskmanagement")
+    console.log(store.state.taskmanagement)
+  if (to.matched.some(record => record.meta.requiresAuth)) { //メタフィールドに`requiresAuth`が付与されているか確認
+    if (!store.state.taskmanagement.auth || !store.state.taskmanagement.auth.token) { //認証されていない
+      next({ path: '/taskmanagement/login' })
+    } else {//認証されている
       next()
     }
-  } else {
+  } else if (to.path === '/taskmanagement/login' && store.state.taskmanagement.auth.token) { //認証済み
+    next({ path: '/taskmanagement/' })
+  } else { //そのまま
     next()
   }
 }

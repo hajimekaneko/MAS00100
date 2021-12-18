@@ -4,7 +4,7 @@ export default {
   fetch: token => {
     return new Promise((resolve, reject) => {
       client.get('/lists', { headers: { 'x-kbn-token': token } })
-        .then(res => resolve({ lists: res.data.lists }))
+        .then(response => resolve({ lists: response.data.lists }))
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
         })

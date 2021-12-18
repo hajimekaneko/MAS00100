@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,7 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'taskmanagement.apps.TaskmanagementConfig', 
+    'apiv1.apps.Apiv1Config',
+    'myappsite.apps.MyappsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',  # django-cleanupを使いたいなら、これも追加
     'rest_framework',  # 追加
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +140,13 @@ if DEBUG:
     INSTALLED_APPS += ['corsheaders']
     MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
     CORS_ORIGIN_WHITELIST = (
-        'http://172.17.0.91:8080',
+        'http://192.168.0.22:8080',
         'http://localhost:8080',
     )
+    CORS_ALLOW_HEADERS = default_headers + (
+    'x-kbn-token',
+    )
+
+
+
+
