@@ -7,8 +7,6 @@ export const authorizeToken = (to, from, next) => {
     // このアプリケーションでは簡略化のため`auth.token`があるかどうかのみで
     // ログイン済みであるかどうかチェックしているが、
     // 本来ならば付与された認証トークンをバックエンドのAPI経由などで検証すべき
-    console.log("state.taskmanagement")
-    console.log(store.state.taskmanagement)
   if (to.matched.some(record => record.meta.requiresAuth)) { //メタフィールドに`requiresAuth`が付与されているか確認
     if (!store.state.taskmanagement.auth || !store.state.taskmanagement.auth.token) { //認証されていない
       next({ path: '/taskmanagement/login' })

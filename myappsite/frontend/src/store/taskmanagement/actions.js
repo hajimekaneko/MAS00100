@@ -1,5 +1,7 @@
 import * as types from './mutation-types'
-import { Auth, List, Task } from '@/api'
+// import { Auth, List, Task } from '@/api'
+import { Auth, Task } from '@/api'
+
 
 export default {
   login: ({ commit }, authInfo) => {
@@ -13,14 +15,20 @@ export default {
         )
   },
 
-  fetchLists: ({ commit, state }) => {
-    return List.fetch(state.auth.token)
-      .then((response) => {
-        console.log(response),
-        commit(types.FETCH_ALL_TASKLIST, response)
-      })
-      .catch(err => { throw err })
+  fetchLists: ({ commit }, response ) => {
+    console.log(commit),
+    console.log(response),
+    commit(types.FETCH_ALL_TASKLIST, response)
   },
+
+  // fetchLists: ({ commit, state }) => {
+  //   return List.fetch(state.auth.token)
+  //     .then((response) => {
+  //       console.log(response),
+  //       commit(types.FETCH_ALL_TASKLIST, response)
+  //     })
+  //     .catch(err => { throw err })
+  // },
 
   addTask: ({ commit, state }, { listId, name }) => {
     return Task.add(state.auth.token, { listId, name })
