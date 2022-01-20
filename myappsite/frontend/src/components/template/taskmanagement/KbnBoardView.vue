@@ -36,12 +36,11 @@ export default {
   },
 
   computed: mapState({
-    lists: state => state.taskmanagement.board.lists
+    lists: state => state.board.lists
   }),
 
   created () {
     this.loadLists()
-    console.log('OK')
   },
 
   methods: {
@@ -61,15 +60,11 @@ export default {
         method: "get",
         url: "/lists",
       }).then(response => {
-        console.log(response.data)
         this.$store.dispatch('fetchLists', response.data)
         .catch(err => Promise.reject(err))
         .then(() => {
           this.resetProgress()
         })
-        
-        console.log("okkoko")
-        console.log(this.lists)
       })
       .catch(err => { throw err })
       // this.$store.dispatch('fetchLists')

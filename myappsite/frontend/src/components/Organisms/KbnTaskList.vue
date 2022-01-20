@@ -74,10 +74,11 @@ export default {
       set (value) {
         console.log("value")
         console.log(value)
+        console.log(this.items)
         // NOTE:
         //  本来なら、Vue.Draggrableから処理されたデータをitemsに反映すれば可能だが、
         //  フロントエンドとバックエンドの状態を整合とるために、ここでは何もしない。
-      }
+      },
     },
     ...mapState({
       canMove: state => state.dragging.target !== null &&
