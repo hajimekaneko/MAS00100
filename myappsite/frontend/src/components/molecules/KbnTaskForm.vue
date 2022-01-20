@@ -76,7 +76,6 @@ export default {
     handleAdd () {
       this.progress = true
       this.error = ''
-
       const { name, listId } = this
       return this.$store.dispatch('addTask', { name, listId })
         .then(() => {

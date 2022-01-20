@@ -3,7 +3,9 @@ import client from './client'
 export default {
   add: (token, { name, listId }) => {
     return new Promise((resolve, reject) => {
-      client.post(`/tasks/add`, { name, listId }, { headers: { 'x-kbn-token': token } })
+      console.log(name)
+      console.log(listId)
+      client.post(`/tasks/add/`, { name, listId }, { headers: { 'x-kbn-token': token } })
         .then(response => resolve(response.data))
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -13,7 +15,7 @@ export default {
 
   update: (token, { id, name, description, listId }) => {
     return new Promise((resolve, reject) => {
-      client.put(`/tasks/${id}/update`, { name, description, listId }, { headers: { 'x-kbn-token': token } })
+      client.put(`/tasks/${id}/update/`, { name, description, listId }, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -23,7 +25,7 @@ export default {
 
   remove: (token, { id }) => {
     return new Promise((resolve, reject) => {
-      client.delete(`/tasks/${id}/remove`, { headers: { 'x-kbn-token': token } })
+      client.delete(`/tasks/${id}/remove/`, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -33,7 +35,7 @@ export default {
 
   move: (token, { id, from, to }) => {
     return new Promise((resolve, reject) => {
-      client.post(`/tasks/${id}/move`, { from, to }, { headers: { 'x-kbn-token': token } })
+      client.post(`/tasks/${id}/move/`, { from, to }, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))

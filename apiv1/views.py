@@ -56,7 +56,7 @@ def createTaskList(name, num):
 # ボード情報
 board = {
     "lists": [
-      createTaskList('TODO', 2),
+      createTaskList('TODO', 1),
       createTaskList('WIP', 1),
       createTaskList('DONE', 1)
     ]
