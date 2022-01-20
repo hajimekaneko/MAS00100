@@ -1,5 +1,4 @@
 <template>
-
   <div class="board-view">
     <KbnBoardNavigation @logout="handleLogout" />
     <p
@@ -32,6 +31,7 @@ export default {
     return {
       progress: false,
       message: ''
+
     }
   },
 

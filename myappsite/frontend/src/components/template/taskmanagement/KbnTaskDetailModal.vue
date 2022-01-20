@@ -11,6 +11,7 @@
           </KbnButton>
         </div>
         <div class="body">
+          {{task}}
           <KbnTaskDetailForm
             :task="task"
             :onupdate="handleUpdate"
@@ -37,7 +38,8 @@ export default {
 
   computed: {
     task () {
-      const id = parseInt(this.$route.params.id)
+      const id = parseInt(this.$route.params.taskId)
+      // const id = this.$route.params.taskId
       return !Number.isNaN(id)
         ? {...this.$store.getters.getTaskById(id)}
         : {}
@@ -46,7 +48,7 @@ export default {
 
   methods: {
     back () {
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/taskmanagement' })
     },
 
     handleClose () {

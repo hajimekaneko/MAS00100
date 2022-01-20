@@ -1,12 +1,15 @@
-<template>
-  <ul class="board-tasks">
-    <li
-      v-for="list in lists"
-      :key="list.id"
-    >
+<template> 
+  <div>
+    <ul class="board-tasks">
+      <li
+        v-for="list in lists"
+        :key="list.listId"
+      >
       <KbnTaskList v-bind="list" />
-    </li>
-  </ul>
+      
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

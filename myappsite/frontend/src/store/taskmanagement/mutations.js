@@ -6,10 +6,6 @@ export default {
   },
 
   [types.FETCH_ALL_TASKLIST] (state, payload) {
-    console.log("state.taskmanagement")
-    console.log(state)
-    console.log(payload)
-    console.log(state.board.lists)
     state.board.lists = payload
   },
 

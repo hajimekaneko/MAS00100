@@ -12,11 +12,11 @@
         @end="handleEnd"
       >
         <li
-          v-for="item in draggableItems"
-          :key="item.id"
+          v-for="task in draggableItems"
+          :key="task.taskId"
         >
           <KbnTaskCard
-            v-bind="item"
+            v-bind="task"
             @remove="handleRemove"
           />
         </li>
@@ -48,15 +48,15 @@ export default {
   },
 
   props: {
-    id: {
+    listId: {
       type: Number,
       required: true
     },
     name: {
       type: String,
       required: true
-    },
-    items: {
+    }, 
+    tasks: {
       type: Array,
       default: () => []
     }
@@ -70,11 +70,11 @@ export default {
 
   computed: {
     draggableItems: {
-      get () { return this.items },
+      get () { 
+        return this.tasks 
+        },
       set (value) {
-        console.log("value")
         console.log(value)
-        console.log(this.items)
         // NOTE:
         //  本来なら、Vue.Draggrableから処理されたデータをitemsに反映すれば可能だが、
         //  フロントエンドとバックエンドの状態を整合とるために、ここでは何もしない。
