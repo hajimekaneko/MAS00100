@@ -3,21 +3,27 @@ import client from './client'
 export default {
   add: (token, { name, listId }) => {
     return new Promise((resolve, reject) => {
-      console.log(name)
-      console.log(listId)
-      client.post(`/tasks/add/`, { name, listId }, { headers: { 'x-kbn-token': token } })
+      console.log({ name,"list_id":listId })
+      // client.post(`/tasks/`, { name, listId }, { headers: { 'x-kbn-token': token } })
+      client.post(`/tasks/`,{ name,"list":listId })
         .then(response => resolve(response.data))
         .catch(err => {
+          console.log("listId")
           reject(new Error(err.response.data.message || err.message))
         })
     })
   },
 
-  update: (token, { id, name, description, listId }) => {
+  update: (token, { taskId, name, description, list }) => {
     return new Promise((resolve, reject) => {
-      client.put(`/tasks/${id}/update/`, { name, description, listId }, { headers: { 'x-kbn-token': token } })
-        .then(() => resolve())
+      console.log(list)
+      client.put(`/tasks/${taskId}/`, { name, description, list }, { headers: { 'x-kbn-token': token } })
+      // client.put(`/tasks/${taskId}/`, {name, description})
+        .then(
+          () => resolve()
+        )
         .catch(err => {
+          console.log("err")
           reject(new Error(err.response.data.message || err.message))
         })
     })

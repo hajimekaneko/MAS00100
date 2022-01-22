@@ -6,6 +6,7 @@ from . import views
 router = routers.SimpleRouter()
 router.register('tasks', views.TaskViewSet)
 router.register('lists', views.ListViewSet)
+# router.register('auth/login', views.AuthViewSet)
 
 app_name = 'apiv1'
 urlpatterns = [

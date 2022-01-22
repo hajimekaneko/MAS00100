@@ -24,10 +24,10 @@ export default {
     const task = payload
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.id !== task.listId) { continue }
-      for (let j = 0; j < list.items.length; j++) {
-        const item = list.items[j]
-        if (item.id === task.id) {
+      if (list.listId !== task.list) { continue }
+      for (let j = 0; j < list.tasks.length; j++) {
+        const item = list.tasks[j]
+        if (item.taskId === task.taskId) {
           item.name = task.name
           item.description = task.description
           break

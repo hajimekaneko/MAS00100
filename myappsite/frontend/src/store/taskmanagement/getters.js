@@ -1,10 +1,11 @@
 export default {
   getTaskById: state => id => {
     const tasks = []
-    console.log("力尽きた20220121")
+    console.log(state.board.lists)
     state.board.lists.forEach(list => {
-      tasks.push(...list.items)
+      
+      tasks.push(...list.tasks)
     })
-    return tasks.find(task => task.id === id)
+    return tasks.find(task => task.taskId === id)
   }
 }

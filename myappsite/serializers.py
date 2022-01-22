@@ -16,7 +16,6 @@ class ListSerializer(serializers.ModelSerializer):
     # contextを設定すると、URLの展開などをしてくれる
     # tasks = TaskSerializer() 
 
-
     # task_set = serializers.
     class Meta:
         model = List
@@ -29,4 +28,7 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('taskId', 'name', 'description','created_at', 'list')
+        # fields = ('taskId', 'name', 'description','created_at')
+
+
 

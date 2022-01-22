@@ -77,6 +77,10 @@ class AuthLoginAPIView(views.APIView):
         print(serializer.data)
         return Response(serializer.data, status.HTTP_201_CREATED)
 
+class AuthViewSet(viewsets.ModelViewSet):
+    queryset = Auth.objects.all()
+    serializer_class = AuthSerializer
+
 class AuthLogoutAPIView(views.APIView):
     def delete(self, request,*args, **Kwargs):
         print("■VIEW:LOGOUT")
@@ -89,7 +93,6 @@ class AuthLogoutAPIView(views.APIView):
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-
 
 class ListViewSet(viewsets.ModelViewSet):
     queryset = List.objects.all()

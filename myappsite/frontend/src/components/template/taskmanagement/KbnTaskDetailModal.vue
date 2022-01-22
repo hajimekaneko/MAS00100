@@ -10,8 +10,8 @@
             <KbnIcon name="close"/>
           </KbnButton>
         </div>
+        {{task}}
         <div class="body">
-          {{task}}
           <KbnTaskDetailForm
             :task="task"
             :onupdate="handleUpdate"

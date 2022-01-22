@@ -24,7 +24,7 @@
     </ul>
     <KbnTaskForm
       v-if="shown"
-      :list-id="id"
+      :listId="listId"
       @close="shown = false"
     />
   </div>
