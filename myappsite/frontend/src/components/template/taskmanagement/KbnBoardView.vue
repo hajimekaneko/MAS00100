@@ -72,7 +72,6 @@ export default {
         .catch(err => Promise.reject(err))
         .then(() => {
           this.resetProgress()
-          console.log(this.lists)
         })
     },
 

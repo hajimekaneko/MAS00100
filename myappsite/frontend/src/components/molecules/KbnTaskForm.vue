@@ -23,7 +23,6 @@
       >
         キャンセル
       </KbnButton>
-      {{list}}
     </div>
     <div class="messages">
       <p

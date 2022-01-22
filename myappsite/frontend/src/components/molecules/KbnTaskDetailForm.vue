@@ -53,7 +53,7 @@ export default {
 
   props: {
     task: {
-      type: Array,
+      type: Object,
       required: true,
       default: () => {}
     },

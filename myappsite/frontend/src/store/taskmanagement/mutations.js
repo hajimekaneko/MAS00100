@@ -38,11 +38,11 @@ export default {
   },
 
   [types.REMOVE_TASK] (state, payload) {
-    const { id, listId } = payload
+    const { taskId, list} = payload
     for (let i = 0; i < state.board.lists.length; i++) {
-      const list = state.board.lists[i]
-      if (list.id !== listId) { continue }
-      list.items = list.items.filter(item => item.id !== id)
+      const newlist = state.board.lists[i]
+      if (newlist.listId !== list.listId) { continue }
+      newlist.tasks = newlist.tasks.filter(task => task.taskId !== taskId)
     }
   },
 

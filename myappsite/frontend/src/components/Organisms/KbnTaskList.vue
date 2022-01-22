@@ -93,8 +93,8 @@ export default {
   },
 
   methods: {
-    handleRemove ({ id, listId }) {
-      return this.$store.dispatch('removeTask', { id, listId })
+    handleRemove ({ taskId, list }) {
+      return this.$store.dispatch('removeTask', { taskId, list })
         .catch(err => Promise.reject(err))
     },
 

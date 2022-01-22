@@ -50,10 +50,10 @@ export default {
       .catch(err => { throw err })
   },
 
-  removeTask: ({ commit, state }, { id, listId }) => {
-    return Task.remove(state.auth.token, { id, listId })
+  removeTask: ({ commit, state }, { taskId, list }) => {
+    return Task.remove(state.auth.token, taskId)
       .then(() => {
-        commit(types.REMOVE_TASK, { id, listId })
+        commit(types.REMOVE_TASK, { taskId, list })
       })
       .catch(err => { throw err })
   },
