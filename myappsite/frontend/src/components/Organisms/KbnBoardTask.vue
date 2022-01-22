@@ -6,7 +6,6 @@
         :key="list.listId"
       >
       <KbnTaskList v-bind="list" />
-      
       </li>
     </ul>
   </div>

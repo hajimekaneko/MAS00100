@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import api from "@/services/api"; //apiに統合する
+// import api from "@/services/api"; //apiに統合する
 import { mapState } from 'vuex'
 import KbnBoardNavigation from '@/components/molecules/KbnBoardNavigation.vue'
 import KbnBoardTask from '@/components/organisms/KbnBoardTask.vue'
@@ -56,24 +56,24 @@ export default {
 
     loadLists () {
       this.setProgress('読み込み中...')
-      api({
-        method: "get",
-        url: "/lists",
-      }).then(response => {
-        this.$store.dispatch('fetchLists', response.data)
+      // api({
+      //   method: "get",
+      //   url: "/lists",
+      // }).then(response => {
+      //   console.log(response.data)
+      //   this.$store.dispatch('fetchLists', response.data)
+      //   .catch(err => Promise.reject(err))
+      //   .then(() => {
+      //     this.resetProgress()
+      //   })
+      // })
+      // .catch(err => { throw err })
+      this.$store.dispatch('fetchLists')
         .catch(err => Promise.reject(err))
         .then(() => {
           this.resetProgress()
+          console.log(this.lists)
         })
-      })
-      .catch(err => { throw err })
-      // this.$store.dispatch('fetchLists')
-      //   .catch(err => Promise.reject(err))
-      //   .then(() => {
-      //     console.log("okkoko")
-      //     this.resetProgress()
-      //     console.log(this.lists)
-      //   })
     },
 
     handleLogout () {

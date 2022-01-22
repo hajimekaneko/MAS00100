@@ -1,32 +1,34 @@
 import * as types from './mutation-types'
-// import { Auth, List, Task } from '@/api'
-import { Auth, Task } from '@/api'
+import { Auth, List, Task } from '@/api'
+// import { Auth, Task } from '@/api'
 
 
 export default {
   login: ({ commit }, authInfo) => {
+    console.log("1")
     return Auth.login(authInfo)
       .then(({ token, userId }) => {
+        console.log("2")
         localStorage.setItem('token', token)
         commit(types.AUTH_LOGIN, { token, userId })
       })
       .catch(
+        console.log("3"),
         err => { throw err }
         )
   },
 
-  fetchLists: ({ commit }, response ) => {
-    commit(types.FETCH_ALL_TASKLIST, response)
-  },
-
-  // fetchLists: ({ commit, state }) => {
-  //   return List.fetch(state.auth.token)
-  //     .then((response) => {
-  //       console.log(response),
-  //       commit(types.FETCH_ALL_TASKLIST, response)
-  //     })
-  //     .catch(err => { throw err })
+  // fetchLists: ({ commit }, response ) => {
+  //   commit(types.FETCH_ALL_TASKLIST, response)
   // },
+
+  fetchLists: ({ commit, state }) => {
+    return List.fetch(state.auth.token)
+      .then((response) => {
+        commit(types.FETCH_ALL_TASKLIST, response.lists)
+      })
+      .catch(err => { throw err })
+  },
 
   addTask: ({ commit, state }, { listId, name }) => {
     return Task.add(state.auth.token, { listId, name })
