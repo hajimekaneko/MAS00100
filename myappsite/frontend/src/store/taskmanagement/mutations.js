@@ -51,21 +51,22 @@ export default {
   },
 
   [types.MOVE_TASK_FROM] (state, payload) {
-    const { target, from } = payload
-    state.dragging.target = target
+    const { targetId, from } = payload
+    state.dragging.target = targetId
     state.dragging.from = from
   },
 
   [types.MOVE_TO_TASK] (state, payload) {
-    const { target, to } = payload
-    state.dragging.target = target
+    const { targetId, to, tolist } = payload
+    state.dragging.target = targetId
     state.dragging.to = to
+    state.dragging.tolist = tolist
   },
 
   [types.MOVE_TASK_DONE] (state, payload) {
     const { target, from, to } = payload
-    const getTaskList = (lists, id) => lists.find(list => list.id === id)
-
+    
+    const getTaskList = (lists, id) => lists.find(list => list.listId === id)
     // ドラッグ&ドロップ処理のための状態をリセット
     state.dragging.target = null
     state.dragging.from = null
@@ -73,15 +74,15 @@ export default {
 
     // 移動元のタスクリストから対象タスクを取り出す
     const fromTaskList = getTaskList(state.board.lists, from)
-    const index = fromTaskList.items.findIndex(item => item.id === target)
-    const task = fromTaskList.items[index]
-    fromTaskList.items.splice(index, 1)
+    const index = fromTaskList.tasks.findIndex(item => item.taskId === target)
+    const task = fromTaskList.tasks[index]
+    fromTaskList.tasks.splice(index, 1)
 
     // 移動先のタスクリストIDに変更
     task.listId = to
 
     // 移動先にタスクリストに対象タスクを格納
     const toTaskList = getTaskList(state.board.lists, to)
-    toTaskList.items.push(task)
+    toTaskList.tasks.push(task)
   }
 }

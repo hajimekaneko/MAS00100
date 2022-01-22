@@ -65,11 +65,15 @@ export default {
       type: Object,
       default: () => []
     },
+    tolist: {
+      type: Array,
+      default: () => []
+    },
   },
 
   data () {
     return {
-      shown: false
+      shown: false,
     }
   },
 
@@ -78,8 +82,8 @@ export default {
       get () { 
         return this.tasks 
         },
-      set (value) {
-        console.log(value)
+      set () {
+        // console.log(value)
         // NOTE:
         //  本来なら、Vue.Draggrableから処理されたデータをitemsに反映すれば可能だが、
         //  フロントエンドとバックエンドの状態を整合とるために、ここでは何もしない。
@@ -101,13 +105,14 @@ export default {
     handleChange ({ added, removed }) {
       if (added) {
         return this.$store.dispatch('moveToTask', {
-          id: added.element.id,
-          listId: this.id
+          taskId: added.element.taskId,
+          listId: this.listId,
+          tolist: this.list
         }).catch(err => Promise.reject(err))
       } else if (removed) {
         return this.$store.dispatch('moveTaskFrom', {
-          id: removed.element.id,
-          listId: this.id
+          taskId: removed.element.taskId,
+          listId: this.listId
         }).catch(err => Promise.reject(err))
       }
     },

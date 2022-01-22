@@ -5,15 +5,12 @@ import { Auth, List, Task } from '@/api'
 
 export default {
   login: ({ commit }, authInfo) => {
-    console.log("1")
     return Auth.login(authInfo)
       .then(({ token, userId }) => {
-        console.log("2")
         localStorage.setItem('token', token)
         commit(types.AUTH_LOGIN, { token, userId })
       })
       .catch(
-        console.log("3"),
         err => { throw err }
         )
   },
@@ -58,19 +55,19 @@ export default {
       .catch(err => { throw err })
   },
 
-  moveTaskFrom: ({ commit }, { id, listId }) => {
-    commit(types.MOVE_TASK_FROM, { target: id, from: listId })
+  moveTaskFrom: ({ commit }, { taskId, listId }) => {
+    commit(types.MOVE_TASK_FROM, { targetId: taskId, from: listId })
     return Promise.resolve()
   },
 
-  moveToTask: ({ commit }, { id, listId }) => {
-    commit(types.MOVE_TO_TASK, { target: id, to: listId })
+  moveToTask: ({ commit }, { taskId, listId, tolist }) => {
+    commit(types.MOVE_TO_TASK, { targetId: taskId, to: listId, tolist: tolist })
     return Promise.resolve()
   },
 
   performTaskMoving: ({ commit, state }) => {
-    const { target, from, to } = state.dragging
-    return Task.move(state.auth.token, { id: target, from, to })
+    const {target, from, to, tolist} = state.dragging
+    return Task.move(state.auth.token, { taskId: target, list: tolist })
       .then(() => {
         commit(types.MOVE_TASK_DONE, { target, from, to })
       })

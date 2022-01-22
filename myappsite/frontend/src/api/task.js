@@ -8,7 +8,6 @@ export default {
       client.post(`/tasks/`, { name, list }, { headers: { 'x-kbn-token': token } })
         .then(response => resolve(response.data))
         .catch(err => {
-          console.log("list")
           reject(new Error(err.response.data.message || err.message))
         })
     })
@@ -16,7 +15,6 @@ export default {
 
   update: (token, { taskId, name, description, list }) => {
     return new Promise((resolve, reject) => {
-      console.log([list])
       client.put(`/tasks/${taskId}/`, { name, description, list }, { headers: { 'x-kbn-token': token } })
       // client.put(`/tasks/${taskId}/`, {name, description})
         .then(
@@ -30,7 +28,6 @@ export default {
   },
 
   remove: (token, taskId ) => {
-    console.log(taskId)
     return new Promise((resolve, reject) => {
       client.delete(`/tasks/${taskId}/`, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
@@ -40,9 +37,9 @@ export default {
     })
   },
 
-  move: (token, { id, from, to }) => {
+  move: (token, { taskId, list }) => {
     return new Promise((resolve, reject) => {
-      client.post(`/tasks/${id}/move/`, { from, to }, { headers: { 'x-kbn-token': token } })
+      client.put(`/tasks/${taskId}/`, {list}, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
