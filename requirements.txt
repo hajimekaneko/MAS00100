@@ -2,3 +2,4 @@ django
 django_cleanup
 djangorestframework
 django-cors-headers
+drf_writable_nested

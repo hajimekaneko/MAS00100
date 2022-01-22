@@ -1,9 +1,11 @@
 import client from './client'
 
 export default {
-  add: (token, { name, listId }) => {
+  add: (token, { name, description, list }) => {
+
     return new Promise((resolve, reject) => {
-      client.post(`/tasks/add`, { name, listId }, { headers: { 'x-kbn-token': token } })
+
+      client.post(`/tasks/`, { name, description, list }, { headers: { 'x-kbn-token': token } })
         .then(response => resolve(response.data))
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -11,9 +13,23 @@ export default {
     })
   },
 
-  update: (token, { id, name, description, listId }) => {
+  update: (token, { taskId, name, description, list }) => {
     return new Promise((resolve, reject) => {
-      client.put(`/tasks/${id}/update`, { name, description, listId }, { headers: { 'x-kbn-token': token } })
+      client.put(`/tasks/${taskId}/`, { name, description, list }, { headers: { 'x-kbn-token': token } })
+      // client.put(`/tasks/${taskId}/`, {name, description})
+        .then(
+          () => resolve()
+        )
+        .catch(err => {
+          console.log("err")
+          reject(new Error(err.response.data.message || err.message))
+        })
+    })
+  },
+
+  remove: (token, taskId ) => {
+    return new Promise((resolve, reject) => {
+      client.delete(`/tasks/${taskId}/`, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
@@ -21,19 +37,9 @@ export default {
     })
   },
 
-  remove: (token, { id }) => {
+  move: (token, { taskId, list }) => {
     return new Promise((resolve, reject) => {
-      client.delete(`/tasks/${id}/remove`, { headers: { 'x-kbn-token': token } })
-        .then(() => resolve())
-        .catch(err => {
-          reject(new Error(err.response.data.message || err.message))
-        })
-    })
-  },
-
-  move: (token, { id, from, to }) => {
-    return new Promise((resolve, reject) => {
-      client.post(`/tasks/${id}/move`, { from, to }, { headers: { 'x-kbn-token': token } })
+      client.put(`/tasks/${taskId}/`, {list}, { headers: { 'x-kbn-token': token } })
         .then(() => resolve())
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))

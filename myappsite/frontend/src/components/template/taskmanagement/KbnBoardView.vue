@@ -1,5 +1,4 @@
 <template>
-
   <div class="board-view">
     <KbnBoardNavigation @logout="handleLogout" />
     <p
@@ -15,6 +14,7 @@
 </template>
 
 <script>
+// import api from "@/services/api"; //apiに統合する
 import { mapState } from 'vuex'
 import KbnBoardNavigation from '@/components/molecules/KbnBoardNavigation.vue'
 import KbnBoardTask from '@/components/organisms/KbnBoardTask.vue'
@@ -31,11 +31,12 @@ export default {
     return {
       progress: false,
       message: ''
+
     }
   },
 
   computed: mapState({
-    lists: state => state.taskmanagement.board.lists
+    lists: state => state.board.lists
   }),
 
   created () {
@@ -55,7 +56,18 @@ export default {
 
     loadLists () {
       this.setProgress('読み込み中...')
-
+      // api({
+      //   method: "get",
+      //   url: "/lists",
+      // }).then(response => {
+      //   console.log(response.data)
+      //   this.$store.dispatch('fetchLists', response.data)
+      //   .catch(err => Promise.reject(err))
+      //   .then(() => {
+      //     this.resetProgress()
+      //   })
+      // })
+      // .catch(err => { throw err })
       this.$store.dispatch('fetchLists')
         .catch(err => Promise.reject(err))
         .then(() => {

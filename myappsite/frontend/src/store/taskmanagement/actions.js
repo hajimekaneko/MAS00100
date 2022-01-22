@@ -1,5 +1,7 @@
 import * as types from './mutation-types'
 import { Auth, List, Task } from '@/api'
+// import { Auth, Task } from '@/api'
+
 
 export default {
   login: ({ commit }, authInfo) => {
@@ -16,14 +18,21 @@ export default {
   fetchLists: ({ commit, state }) => {
     return List.fetch(state.auth.token)
       .then((response) => {
-        console.log(response),
-        commit(types.FETCH_ALL_TASKLIST, response)
+        commit(types.FETCH_ALL_TASKLIST, response.lists)
       })
       .catch(err => { throw err })
   },
 
-  addTask: ({ commit, state }, { listId, name }) => {
-    return Task.add(state.auth.token, { listId, name })
+  // fetchTasks: ({ commit, state }) => {
+  //   return Task.fetch(state.auth.token)
+  //     .then((response) => {
+  //       commit(types.FETCH_ALL_LISTLIST, response.tasks)
+  //     })
+  //     .catch(err => { throw err })
+  // },
+
+  addTask: ({ commit, state }, { name, description, list }) => {
+    return Task.add(state.auth.token, { list, description, name })
       .then((task) => {
         commit(types.ADD_TASK, task)
       })
@@ -38,27 +47,27 @@ export default {
       .catch(err => { throw err })
   },
 
-  removeTask: ({ commit, state }, { id, listId }) => {
-    return Task.remove(state.auth.token, { id, listId })
+  removeTask: ({ commit, state }, { taskId, list }) => {
+    return Task.remove(state.auth.token, taskId)
       .then(() => {
-        commit(types.REMOVE_TASK, { id, listId })
+        commit(types.REMOVE_TASK, { taskId, list })
       })
       .catch(err => { throw err })
   },
 
-  moveTaskFrom: ({ commit }, { id, listId }) => {
-    commit(types.MOVE_TASK_FROM, { target: id, from: listId })
+  moveTaskFrom: ({ commit }, { taskId, listId }) => {
+    commit(types.MOVE_TASK_FROM, { targetId: taskId, from: listId })
     return Promise.resolve()
   },
 
-  moveToTask: ({ commit }, { id, listId }) => {
-    commit(types.MOVE_TO_TASK, { target: id, to: listId })
+  moveToTask: ({ commit }, { taskId, listId, tolist }) => {
+    commit(types.MOVE_TO_TASK, { targetId: taskId, to: listId, tolist: tolist })
     return Promise.resolve()
   },
 
   performTaskMoving: ({ commit, state }) => {
-    const { target, from, to } = state.dragging
-    return Task.move(state.auth.token, { id: target, from, to })
+    const {target, from, to, tolist} = state.dragging
+    return Task.move(state.auth.token, { taskId: target, list: tolist })
       .then(() => {
         commit(types.MOVE_TASK_DONE, { target, from, to })
       })

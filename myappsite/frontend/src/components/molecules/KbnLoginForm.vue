@@ -124,7 +124,6 @@ export default {
           .catch(err => {
             this.error = err.message
             console.log("ログインエラーです。")
-            console.log(this.error)
           })
           .then(() => {
             this.progress = false

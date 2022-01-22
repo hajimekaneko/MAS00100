@@ -3,8 +3,8 @@ import client from './client'
 export default {
   login: authInfo => {
     return new Promise((resolve, reject) => {
+      console.log(authInfo)
       client.post('/auth/login/', authInfo)
-        // .then(response => console.log(response.data))
         .then(response => resolve({ token: response.data.token, userId: response.data.userId }),
         )
         .catch(err => {

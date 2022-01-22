@@ -1,14 +1,14 @@
 <template>
   <div class="task-card">
     <div class="name">
-      <router-link :to="{ name: 'taskDetailModal', params: { id } }">
+      <router-link :to="{ name: 'taskDetailModal', params: { taskId } }">
         <h3>{{ name }}</h3>
       </router-link>
     </div>
     <div class="actions">
       <KbnButton
         type="text"
-        @click="$emit('remove', { id, listId })"
+        @click="$emit('remove', { taskId, list })"
       >
         <KbnIcon name="remove" />
       </KbnButton>
@@ -29,7 +29,7 @@ export default {
   },
 
   props: {
-    id: {
+    taskId: {
       type: Number,
       required: true
     },
@@ -41,8 +41,8 @@ export default {
       type: String,
       default: ''
     },
-    listId: {
-      type: Number,
+    list: {
+      type: Object,
       required: true
     }
   }

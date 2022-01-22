@@ -8,14 +8,18 @@ import state from '@/store/taskmanagement/state'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules:{
-    taskmanagement: {
-      namespaced: false,
-      state, // 定義したstateを`state`オプションに指定
-      getters,
-      actions,
-      mutations,
-    }
-  },
+  // modules:{
+  //   taskmanagement: {
+  //     namespaced: false,
+  //     state, // 定義したstateを`state`オプションに指定
+  //     getters,
+  //     actions,
+  //     mutations,
+  //   }
+  // },
+  state, // 定義したstateを`state`オプションに指定
+  getters,
+  actions,
+  mutations,
   strict: process.env.NODE_ENV !== 'production'
 })

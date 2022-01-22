@@ -9,6 +9,10 @@
         type="text"
         placeholder="タスク..."
       >
+      <textarea
+      v-model="description"
+        placeholder="説明"
+      ></textarea>
     </div>
     <div class="form-actions">
       <KbnButton
@@ -52,15 +56,16 @@ export default {
   },
 
   props: {
-    listId: {
-      type: Number,
-      required: true
+    list: {
+      type: Object,
+      default: () => []
     }
   },
 
   data () {
     return {
       name: '',
+      description:'',
       progress: false,
       error: ''
     }
@@ -76,9 +81,8 @@ export default {
     handleAdd () {
       this.progress = true
       this.error = ''
-
-      const { name, listId } = this
-      return this.$store.dispatch('addTask', { name, listId })
+      const { name, description, list } = this
+      return this.$store.dispatch('addTask', { name, description, list })
         .then(() => {
           this.$emit('close')
         })
@@ -109,11 +113,15 @@ export default {
 }
 input {
   width: 100%;
-  padding: 0;
+  padding: 14px, 2px;
 }
 .form-actions {
   display: flex;
   justify-content: space-between;
   padding: 4px;
+}
+textarea {
+    width: 100%;
+    padding: 14px, 2px;
 }
 </style>

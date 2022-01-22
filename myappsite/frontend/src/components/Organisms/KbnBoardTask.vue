@@ -1,19 +1,21 @@
-<template>
-  <ul class="board-tasks">
-    <li
-      v-for="list in lists"
-      :key="list.id"
-    >
-      <KbnTaskList v-bind="list" />
-    </li>
-  </ul>
+<template> 
+  <div>
+    <ul class="board-tasks">
+      <li
+        v-for="list in lists"
+        :key="list.listId"
+      >
+      <KbnTaskList v-bind="list" :list="list" />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 import KbnTaskList from '@/components/organisms/KbnTaskList.vue'
 
 export default {
-  name: 'KbBoardTask',
+  name: 'KbnBoardTask',
 
   components: {
     KbnTaskList

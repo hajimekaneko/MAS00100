@@ -12,11 +12,12 @@
         @end="handleEnd"
       >
         <li
-          v-for="item in draggableItems"
-          :key="item.id"
+          v-for="task in draggableItems"
+          :key="task.taskId"
         >
+        
           <KbnTaskCard
-            v-bind="item"
+            v-bind="task"
             @remove="handleRemove"
           />
         </li>
@@ -24,7 +25,7 @@
     </ul>
     <KbnTaskForm
       v-if="shown"
-      :list-id="id"
+      :list="list"
       @close="shown = false"
     />
   </div>
@@ -48,35 +49,45 @@ export default {
   },
 
   props: {
-    id: {
+    listId: {
       type: Number,
       required: true
     },
     name: {
       type: String,
       required: true
-    },
-    items: {
+    }, 
+    tasks: {
       type: Array,
       default: () => []
-    }
+    },
+    list: {
+      type: Object,
+      default: () => []
+    },
+    tolist: {
+      type: Array,
+      default: () => []
+    },
   },
 
   data () {
     return {
-      shown: false
+      shown: false,
     }
   },
 
   computed: {
     draggableItems: {
-      get () { return this.items },
-      set (value) {
-        console.log(value)
+      get () { 
+        return this.tasks 
+        },
+      set () {
+        // console.log(value)
         // NOTE:
         //  本来なら、Vue.Draggrableから処理されたデータをitemsに反映すれば可能だが、
         //  フロントエンドとバックエンドの状態を整合とるために、ここでは何もしない。
-      }
+      },
     },
     ...mapState({
       canMove: state => state.dragging.target !== null &&
@@ -86,21 +97,22 @@ export default {
   },
 
   methods: {
-    handleRemove ({ id, listId }) {
-      return this.$store.dispatch('removeTask', { id, listId })
+    handleRemove ({ taskId, list }) {
+      return this.$store.dispatch('removeTask', { taskId, list })
         .catch(err => Promise.reject(err))
     },
 
     handleChange ({ added, removed }) {
       if (added) {
         return this.$store.dispatch('moveToTask', {
-          id: added.element.id,
-          listId: this.id
+          taskId: added.element.taskId,
+          listId: this.listId,
+          tolist: this.list
         }).catch(err => Promise.reject(err))
       } else if (removed) {
         return this.$store.dispatch('moveTaskFrom', {
-          id: removed.element.id,
-          listId: this.id
+          taskId: removed.element.taskId,
+          listId: this.listId
         }).catch(err => Promise.reject(err))
       }
     },

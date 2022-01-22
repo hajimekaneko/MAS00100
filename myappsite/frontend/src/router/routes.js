@@ -7,7 +7,7 @@ export default [{
   component: KbnBoardView,
   meta: { requiresAuth: true },
   children: [{
-    path: 'tasks/:id',
+    path: 'tasks/:taskId',
     component: KbnTaskDetailModal,
     name: 'taskDetailModal',
     meta: { requiresAuth: true }

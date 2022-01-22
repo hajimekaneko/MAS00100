@@ -1,5 +1,9 @@
 # MAS00100
 
+
+curl -X POST "http://127.0.0.1:8000/api/v1/tasks/" -H "Content-Type: application/json" -d "{\"name\": \"aaa\", \"listId\": \"2\"}"
+
+
 ## MyAppSite
 
 https://blog.narito.ninja/detail/201
@@ -13,6 +17,23 @@ https://qiita.com/kamicop/items/c5c0917ed226234ee288
 
 ## VUEディレクトリ構成
 https://qiita.com/tockn/items/2ce68b99e0839df52200
+
+
+```
+
+├── KbnBoardView
+│  ├── KbnBoardNavigation
+│  └── KbnBoardTask 
+│      └── KbnTaskList
+│          ├── KbnTaskListHeader
+│          ├── KbnTaskCard
+│          └── KbnTaskForm
+
+```
+
+
+
+
 
 
 ```

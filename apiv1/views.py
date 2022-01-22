@@ -4,8 +4,8 @@ from rest_framework import response
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import Serializer
 from django.shortcuts import get_object_or_404
-from myappsite.models import Auth, List
-from myappsite.serializers import AuthSerializer, ListSerializer
+from myappsite.models import Auth, List, Task
+from myappsite.serializers import AuthSerializer, ListSerializer, TaskSerializer
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
 
@@ -43,7 +43,7 @@ def createTask(listId):
 
 # タスクリストを作成するヘルパー関数
 def createTaskList(name, num):
-    id = generateTaskListId()
+    id = generateTaskListId()   
     list = {
         "listId": id,
         "name": name,
@@ -56,7 +56,7 @@ def createTaskList(name, num):
 # ボード情報
 board = {
     "lists": [
-      createTaskList('TODO', 2),
+      createTaskList('TODO', 1),
       createTaskList('WIP', 1),
       createTaskList('DONE', 1)
     ]
@@ -77,6 +77,10 @@ class AuthLoginAPIView(views.APIView):
         print(serializer.data)
         return Response(serializer.data, status.HTTP_201_CREATED)
 
+class AuthViewSet(viewsets.ModelViewSet):
+    queryset = Auth.objects.all()
+    serializer_class = AuthSerializer
+
 class AuthLogoutAPIView(views.APIView):
     def delete(self, request,*args, **Kwargs):
         print("■VIEW:LOGOUT")
@@ -86,18 +90,25 @@ class AuthLogoutAPIView(views.APIView):
         else:
             return Response(status = status.HTTP_204_NO_CONTENT)
 
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class ListViewSet(viewsets.ModelViewSet):
+    queryset = List.objects.all()
+    serializer_class = ListSerializer
 
 class GetListAPIView(views.APIView):
     def get(self, request, *args, **Kwargs):
 
-        token = request.headers['x-kbn-token']
-        if token is None :
-            return Response("許可されていません", status = status.HTTP_403_FORBIDDEN)
-        else:
-            print("■{}".format(board["lists"]))
-            # list = List.objects.all()
-            list = get_object_or_404(List) 
-            print(list)
-            serializer = ListSerializer(instance=list)   
-            print("■{}".format(serializer.data))
+        # token = request.headers['x-kbn-token']
+        # if token is None :
+        #     return Response("許可されていません", status = status.HTTP_403_FORBIDDEN)
+        # else:
+        #     print("■{}".format(board["lists"]))
+        #     # list = List.objects.all()
+        #     list = get_object_or_404(List) 
+        #     print(list)
+        #     serializer = ListSerializer(instance=list)   
+        #     print("■{}".format(serializer.data))
             return Response(serializer.data, status = status.HTTP_200_OK)

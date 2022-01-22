@@ -1,9 +1,9 @@
 export default {
   getTaskById: state => id => {
     const tasks = []
-    state.taskmanagement.board.lists.forEach(list => {
-      tasks.push(...list.items)
+    state.board.lists.forEach(list => {
+      tasks.push(...list.tasks)
     })
-    return tasks.find(task => task.id === id)
+    return tasks.find(task => task.taskId === id)
   }
 }
