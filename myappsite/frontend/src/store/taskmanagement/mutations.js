@@ -6,7 +6,6 @@ export default {
   },
 
   [types.FETCH_ALL_TASKLIST] (state, payload) {
-    console.log(payload)
     state.board.lists = payload
   },
 
@@ -23,11 +22,12 @@ export default {
 
   [types.UPDATE_TASK] (state, payload) {
     const task = payload
+    
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.listId !== task.list) { continue }
+      if (list.listId !== task.list.listId) { continue }    
       for (let j = 0; j < list.tasks.length; j++) {
-        const item = list.tasks[j]
+        const item = list.tasks[j]      
         if (item.taskId === task.taskId) {
           item.name = task.name
           item.description = task.description

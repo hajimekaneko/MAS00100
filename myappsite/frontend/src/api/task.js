@@ -16,8 +16,8 @@ export default {
 
   update: (token, { taskId, name, description, list }) => {
     return new Promise((resolve, reject) => {
-      console.log(list)
-      client.put(`/tasks/${taskId}/`, { name, description, list }, { headers: { 'x-kbn-token': token } })
+      console.log([list])
+      client.put(`/tasks/${taskId}/`, { name, description, "list":list }, { headers: { 'x-kbn-token': token } })
       // client.put(`/tasks/${taskId}/`, {name, description})
         .then(
           () => resolve()

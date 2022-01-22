@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Auth, List, Task
-
+from drf_writable_nested.serializers import WritableNestedModelSerializer
 
 
 
@@ -21,9 +21,9 @@ class ListSerializer(serializers.ModelSerializer):
         model = List
         # fields = '__all__'
         fields = ('listId', 'name', 'created_at', 'tasks')
-        depth = 1
+        depth = 2
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(WritableNestedModelSerializer):
     list = ListSerializer() 
     class Meta:
         model = Task
