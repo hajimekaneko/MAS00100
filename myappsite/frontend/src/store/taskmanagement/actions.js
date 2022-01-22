@@ -31,8 +31,8 @@ export default {
   //     .catch(err => { throw err })
   // },
 
-  addTask: ({ commit, state }, { name, list }) => {
-    return Task.add(state.auth.token, { list, name })
+  addTask: ({ commit, state }, { name, description, list }) => {
+    return Task.add(state.auth.token, { list, description, name })
       .then((task) => {
         commit(types.ADD_TASK, task)
       })

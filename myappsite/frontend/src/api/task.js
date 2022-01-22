@@ -1,11 +1,11 @@
 import client from './client'
 
 export default {
-  add: (token, { name, list }) => {
+  add: (token, { name, description, list }) => {
 
     return new Promise((resolve, reject) => {
 
-      client.post(`/tasks/`, { name, list }, { headers: { 'x-kbn-token': token } })
+      client.post(`/tasks/`, { name, description, list }, { headers: { 'x-kbn-token': token } })
         .then(response => resolve(response.data))
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
