@@ -13,8 +13,8 @@ export default {
     const task = payload
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.id === task.listId) {
-        list.items.push(task)
+      if (list.listId === task.list.listId) {
+        list.tasks.push(task)
         break
       }
     }

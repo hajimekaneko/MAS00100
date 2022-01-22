@@ -23,6 +23,7 @@
       >
         キャンセル
       </KbnButton>
+      {{list}}
     </div>
     <div class="messages">
       <p
@@ -52,9 +53,9 @@ export default {
   },
 
   props: {
-    listId: {
-      type: Number,
-      required: true
+    list: {
+      type: Object,
+      default: () => []
     }
   },
 
@@ -76,8 +77,8 @@ export default {
     handleAdd () {
       this.progress = true
       this.error = ''
-      const { name, listId } = this
-      return this.$store.dispatch('addTask', { name, listId })
+      const { name, list } = this
+      return this.$store.dispatch('addTask', { name, list })
         .then(() => {
           this.$emit('close')
         })

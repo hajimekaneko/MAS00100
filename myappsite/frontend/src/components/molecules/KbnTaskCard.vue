@@ -42,7 +42,7 @@ export default {
       default: ''
     },
     list: {
-      type: Number,
+      type: Object,
       required: true
     }
   }

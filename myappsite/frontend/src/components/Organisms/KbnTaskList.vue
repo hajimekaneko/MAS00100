@@ -15,6 +15,7 @@
           v-for="task in draggableItems"
           :key="task.taskId"
         >
+        
           <KbnTaskCard
             v-bind="task"
             @remove="handleRemove"
@@ -24,7 +25,7 @@
     </ul>
     <KbnTaskForm
       v-if="shown"
-      :listId="listId"
+      :list="list"
       @close="shown = false"
     />
   </div>
@@ -59,7 +60,11 @@ export default {
     tasks: {
       type: Array,
       default: () => []
-    }
+    },
+    list: {
+      type: Object,
+      default: () => []
+    },
   },
 
   data () {

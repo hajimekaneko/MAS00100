@@ -1,14 +1,14 @@
 import client from './client'
 
 export default {
-  add: (token, { name, listId }) => {
+  add: (token, { name, list }) => {
+
     return new Promise((resolve, reject) => {
-      console.log({ name,"list_id":listId })
-      // client.post(`/tasks/`, { name, listId }, { headers: { 'x-kbn-token': token } })
-      client.post(`/tasks/`,{ name,"list":listId })
+
+      client.post(`/tasks/`, { name, list }, { headers: { 'x-kbn-token': token } })
         .then(response => resolve(response.data))
         .catch(err => {
-          console.log("listId")
+          console.log("list")
           reject(new Error(err.response.data.message || err.message))
         })
     })
@@ -17,7 +17,7 @@ export default {
   update: (token, { taskId, name, description, list }) => {
     return new Promise((resolve, reject) => {
       console.log([list])
-      client.put(`/tasks/${taskId}/`, { name, description, "list":list }, { headers: { 'x-kbn-token': token } })
+      client.put(`/tasks/${taskId}/`, { name, description, list }, { headers: { 'x-kbn-token': token } })
       // client.put(`/tasks/${taskId}/`, {name, description})
         .then(
           () => resolve()

@@ -5,7 +5,7 @@
         v-for="list in lists"
         :key="list.listId"
       >
-      <KbnTaskList v-bind="list" />
+      <KbnTaskList v-bind="list" :list="list" />
       </li>
     </ul>
   </div>
@@ -15,7 +15,7 @@
 import KbnTaskList from '@/components/organisms/KbnTaskList.vue'
 
 export default {
-  name: 'KbBoardTask',
+  name: 'KbnBoardTask',
 
   components: {
     KbnTaskList

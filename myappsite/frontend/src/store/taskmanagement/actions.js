@@ -18,10 +18,6 @@ export default {
         )
   },
 
-  // fetchLists: ({ commit }, response ) => {
-  //   commit(types.FETCH_ALL_TASKLIST, response)
-  // },
-
   fetchLists: ({ commit, state }) => {
     return List.fetch(state.auth.token)
       .then((response) => {
@@ -30,8 +26,16 @@ export default {
       .catch(err => { throw err })
   },
 
-  addTask: ({ commit, state }, { listId, name }) => {
-    return Task.add(state.auth.token, { listId, name })
+  // fetchTasks: ({ commit, state }) => {
+  //   return Task.fetch(state.auth.token)
+  //     .then((response) => {
+  //       commit(types.FETCH_ALL_LISTLIST, response.tasks)
+  //     })
+  //     .catch(err => { throw err })
+  // },
+
+  addTask: ({ commit, state }, { name, list }) => {
+    return Task.add(state.auth.token, { list, name })
       .then((task) => {
         commit(types.ADD_TASK, task)
       })
