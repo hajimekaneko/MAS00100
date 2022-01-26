@@ -1,5 +1,5 @@
 <template>
-    <footer>
+    <footer class="fixed-bottom row">
         <p>Copyright 2021 Hajime Kaneko.</p>
         <!-- <ul>
             <li><a href="https://twitter.com/toritoritorina">Twitter</a></li>
@@ -20,8 +20,6 @@
     footer {
         background-color: #000;
         color: #fff;
-        padding: 0 20px;
-        margin-top: 160px;
     }
     ul > li {
         display: inline-block;

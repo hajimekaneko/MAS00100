@@ -1,5 +1,6 @@
 <template>
-  <div class="board-view">
+  <main class="row ">
+    <div class="col board-view">
     <KbnBoardNavigation @logout="handleLogout" />
     <p
       v-if="progress"
@@ -10,7 +11,8 @@
     <KbnBoardTask :lists="lists" />
     <!-- タスク詳細モーダル表示用プレースホルダ -->
     <router-view />
-  </div>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -92,7 +94,12 @@ export default {
 </script>
 
 <style scoped>
+
+main{
+  padding-top: 10vh;
+}
 .board-view {
+  height:80vh;
   border: medium solid black;
 }
 .progress {

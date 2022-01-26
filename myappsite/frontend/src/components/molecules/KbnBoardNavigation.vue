@@ -1,9 +1,9 @@
 <template>
-  <nav class="board-navigation">
-    <div class="title">
-      <h1>Kanban App 3 </h1>
+  <nav class="row board-navigation">
+    <div class="col-10 title">
+      <h1>TaskManagement </h1>
     </div>
-    <div class="actions">
+    <div class="col-2 actions">
       <KbnButton
         type="text"
         @click="$emit('logout')"

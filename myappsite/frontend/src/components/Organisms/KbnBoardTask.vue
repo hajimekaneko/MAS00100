@@ -1,7 +1,7 @@
 <template> 
-  <div>
-    <ul class="board-tasks">
-      <li
+  <div class="board-main ">
+    <ul class="row board-tasks">
+      <li class="col"
         v-for="list in lists"
         :key="list.listId"
       >
@@ -31,9 +31,12 @@ export default {
 </script>
 
 <style scoped>
+.col{
+  padding:0px
+}
 ul {
   display: flex;
-  min-height: 100vh;
+  min-height: 65vh;
   list-style-type: none;
   margin: 16px;
   padding: 0;

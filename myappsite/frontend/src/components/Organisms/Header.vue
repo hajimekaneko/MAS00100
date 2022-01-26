@@ -1,7 +1,7 @@
 <template>
-    <header>
-        <h1><a href="/">MyAppSite</a></h1>
-        <div id="form">
+    <header class="fixed-top row">
+        <h1 class="col"><a href="/">MyAppSite</a></h1>
+        <div  id="form">
             ここは検索欄がはいる
         </div>
     </header>
@@ -21,7 +21,7 @@
         display: grid;
         grid-template-columns: 20px 1fr 20px;
         grid-template-rows: 1fr;
-        margin-bottom: 80px;
+
     }
 
     header > * {
